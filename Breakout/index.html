@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            width: 100vw;
+            background-color: #065A9E;
+            overflow: hidden;
+        }
+        #i1 {
+            position: absolute;
+            visibility: hidden;
+            height: 50px;
+            width: 50px;
+        }
+        #i1 img {
+            height: 100%;
+            width: 100%;
+        }
+        #a1 {
+            position: absolute;
+            height: 10px;
+            width: 200px;
+            background-color: springgreen;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #end {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            left: 0;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.75);
+            color: white;
+            font-size: 3.6rem;
+            z-index: 1;
+        }
+        #playButton, #restartButton, #backButton {
+            position: absolute;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background-color: #77c2ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        #playButton {
+            top: 20px;
+        }
+        #restartButton {
+            top: 100px;
+            display: none;
+        }
+        #backButton {
+            top: 180px;
+            display: none;
+        }
+        .block {
+            position: absolute;
+            height: 30px;
+            background-color: tomato;
+        }
+        #score {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="end">
+        <p>Game Over!</p>
+        <button id="restartButton" onclick="restartGame()">Play Again</button>
+        <button id="backButton" onclick="goBack()">Back</button>
+    </div>
+    <div id="score">Score: 0</div>
+    <div id="i1"><img src="pilka.png" alt="Ball"></div>
+    <div id="a1"></div>
+
+    <button id="playButton" onclick="StartMove()">Play</button>
+
+    <script>
+        let id1, xx, yy;
+        let dx = 5, dy = -5;  // Ball movement direction (x and y velocities)
+        let x = window.innerWidth / 2; // Paddle position
+        let score = 0;
+        const MIN_DX = 2; // Minimum horizontal speed
+
+        // Create blocks spanning across the full width
+        function createBlocks() {
+            const rows = 3;
+            const blockHeight = 30;
+            const blockSpacing = 5;
+            const blockWidth = (window.innerWidth - (blockSpacing * (rows - 1))) / 5; // Dynamic block width
+            const blocksContainer = document.createElement('div');
+            blocksContainer.id = 'blocksContainer';
+            document.body.appendChild(blocksContainer);
+
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < 5; j++) {  // Five blocks per row
+                    const block = document.createElement('div');
+                    block.classList.add('block');
+                    block.style.width = `${blockWidth}px`;
+                    block.style.height = `${blockHeight}px`;
+                    block.style.top = `${i * (blockHeight + blockSpacing)}px`;
+                    block.style.left = `${j * (blockWidth + blockSpacing)}px`;
+                    blocksContainer.appendChild(block);
+                }
+            }
+        }
+
+        createBlocks(); // Initialize blocks
+
+        function updateScore() {
+            score += 10;
+            document.getElementById('score').textContent = 'Score: ' + score;
+        }
+
+        function updateBoundaries() {
+            return {
+                boundaryX: window.innerWidth - 50,
+                boundaryY: window.innerHeight - 100
+            };
+        }
+
+        function StartMove() {
+            const paddleRect = a1.getBoundingClientRect();
+            document.getElementById("i1").style.visibility = "visible";
+            document.getElementById("playButton").style.display = "none";
+            document.getElementById("restartButton").style.display = "none";
+            document.getElementById("backButton").style.display = "none";
+
+            xx = (window.innerWidth - 50) / 2;
+            yy = paddleRect.top - 50;
+
+            i1.style.left = xx + 'px';
+            i1.style.top = yy + 'px';
+            id1 = setInterval(gs, 30);
+        }
+
+        function stop() {
+            clearInterval(id1);
+        }
+
+        function gs() {
+        const { boundaryX, boundaryY } = updateBoundaries();
+        xx += dx;
+        yy += dy;
+
+        // Wall collision
+        if (xx <= 0 || xx >= boundaryX) dx *= -1;  // Bounce on left and right walls
+        if (yy <= 0) dy *= -1;                     // Bounce on top wall
+        if (yy >= boundaryY) {                      // Game over condition
+            document.getElementById("end").style.display = "flex";
+            stop();
+            document.getElementById("restartButton").style.display = "block";
+            document.getElementById("backButton").style.display = "block";
+        }
+
+        // Ball-paddle collision detection with angled bounce
+        const ballRect = i1.getBoundingClientRect();
+        const paddleRect = a1.getBoundingClientRect();
+        if (
+            ballRect.bottom >= paddleRect.top &&
+            ballRect.left < paddleRect.right &&
+            ballRect.right > paddleRect.left
+        ) {
+            dy *= -1;
+
+            // Small offset to prevent getting stuck on paddle
+            yy -= 10;
+
+            const hitPosition = (ballRect.left + ballRect.width / 2 - paddleRect.left) / paddleRect.width;
+            dx = (hitPosition - 0.5) * 10; // Calculate new angle based on where it hit the paddle
+
+            // Ensure dx doesn't get too small
+            if (Math.abs(dx) < MIN_DX) {
+                dx = dx < 0 ? -MIN_DX : MIN_DX;
+            }
+        }
+
+        // Ball-block collision detection
+        document.querySelectorAll('.block').forEach(block => {
+            const blockRect = block.getBoundingClientRect();
+            if (
+                ballRect.right >= blockRect.left &&
+                ballRect.left <= blockRect.right &&
+                ballRect.bottom >= blockRect.top &&
+                ballRect.top <= blockRect.bottom
+            ) {
+                dy *= -1;
+                block.remove();
+                updateScore();
+            }
+        });
+
+        i1.style.left = xx + 'px';
+        i1.style.top = yy + 'px';
+    }
+
+        document.addEventListener("keydown", function(e) {
+            let stepSize = 20;
+            if (e.keyCode === 37) x -= stepSize;
+            if (e.keyCode === 39) x += stepSize;
+
+            x = Math.max(0, Math.min(x, window.innerWidth - 200));
+            a1.style.left = x + 'px';
+        });
+
+        function restartGame() {
+            document.getElementById("end").style.display = "none";
+            document.getElementById("score").textContent = 'Score: 0';
+            score = 0;
+            document.getElementById('blocksContainer').remove();
+            createBlocks();
+
+            // Reset paddle position
+            x = window.innerWidth / 2;  // Center paddle horizontally
+            a1.style.left = x + 'px';
+
+            // Reset ball position and direction
+            xx = window.innerWidth / 2; // Center ball horizontally
+            yy = window.innerHeight - 100;   // Position ball just above paddle
+            dx = 5;
+            dy = -5;
+            
+            StartMove();
+        }
+
+        function goBack() {
+            window.location.href = '../Portfolio/index.html';
+        }
+
+        window.addEventListener('resize', () => {
+            const { boundaryX, boundaryY } = updateBoundaries();
+            xx = Math.min(xx, boundaryX);
+            yy = Math.min(yy, boundaryY);
+            i1.style.left = xx + 'px';
+            i1.style.top = yy + 'px';
+
+            x = Math.min(x, window.innerWidth - 200);
+            a1.style.left = x + 'px';
+        });
+    </script>
+</body>
+
+</html>

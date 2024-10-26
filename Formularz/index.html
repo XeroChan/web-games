@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="title">
+        <h2>Zmiana parametrów div1<br>
+        </h2>
+        <form name="form2">
+            <div class="border-style">
+                border style
+                <select id="borderStyle">
+                    <option value="" selected disabled hidden>none</option>
+                    <option value="dotted">dotted</option> <!-- Ctrl + Alt + Arrow Keys - work on multiple lines-->
+                    <option value="dashed">dashed</option>
+                    <option value="solid">solid</option>
+                    <option value="double">double</option>
+                    <option value="groove">groove</option>
+                    <option value="ridge">ridge</option>
+                    <option value="inset">inset</option>
+                    <option value="outset">outset</option>
+                    <option value="hidden">hidden</option>
+                </select>
+            </div>
+            <div class="left">
+                <input type="number" id="divStLeft" name="Left" size="8" onblur="Clear(this);"
+                    onkeydown="return event.keyCode !== 69 //e">
+                <label>left<p> [px]</p></label>
+            </div>
+            <div class="border-width">
+                <input type="number" id="borderWidth" name="borderWidth" size="8" onblur="Clear(this);"
+                    onkeydown="return event.keyCode !== 69">
+                <label>border width<p> [px]</p></label>
+            </div>
+            <div class="border-color">
+                <p>border color</p>
+                <input type="color" id="borderColor">
+            </div>
+            <p>Aby zatwiedzić parametr left wciśnij (L)<br>Aby zatwierdzić parametr border width wciśnij (W)<br><a href="../Portfolio/index.html">Powrót</a></p><br>
+        </form>
+    </div>
+    <div class="keep">
+        <div id="div1" onclick="witaj()">
+            <h1 class="header">Nagłówek</h1>
+            <h2 class="text">Tekst</h2>
+        </div>
+        <div id="div2">
+            <form id="form1" name="form1">
+                <fieldset>
+                    <legend>Kalkulator</legend>
+                    <input type="text" name="a1" size="5" placeholder="Liczba 1">
+                    <input type="button" value="+" onclick="Dodaj()">
+                    <input type="button" value="-" onclick="Odejmij()">
+                    <input type="button" value="*" onclick="Pomnoz()">
+                    <input type="button" value="/" onclick="Dziel()">
+                    <input type="text" name="b1" size="5" placeholder="Liczba 2"><br>
+                    <hr>
+                    <input type="text" name="c1" size="5" placeholder="Wynik">
+                    <hr>
+                    <br>
+                    <p>Aby policzyć poniższe, kliknij w któryś z przycisków:</p>
+                    <input type="button" value="&Sqrt;" onclick="Pierwiastek()">
+                    <input type="button" value="!" onclick="Silnia()">
+                    <input type="button" value="a^b" onclick="Potega()">
+                </fieldset>
+                
+            </form>
+        </div>
+    </div>
+    <script src="JavaScript.js"></script>
+</body>
+
+</html>

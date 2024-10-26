@@ -1,0 +1,103 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  width: 95vw;
+  height: 95vh;
+}
+a {
+  margin-left: 50%;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+a:link {
+  color: #995400;
+}
+
+/* visited link */
+a:visited {
+  color: #522d00;
+}
+
+/* mouse over link */
+a:hover {
+  color: #ffa231;
+}
+
+/* selected link */
+a:active {
+  color: orange;
+}
+.columnL {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  align-content: center;
+  align-items: center;
+  grid-template-areas:
+    "o1 o2"
+    "o3 o4"
+    "o5 o6";
+  width: 22%;
+  height: 70%;
+  justify-items: start;
+  justify-content: center;
+  margin-left: 5%;
+  margin-right: 20%;
+}
+
+.o1 {
+  grid-area: o1;
+}
+
+.o2 {
+  grid-area: o2;
+}
+
+.o3 {
+  grid-area: o3;
+}
+
+.o4 {
+  grid-area: o4;
+}
+
+.o5 {
+  grid-area: o5;
+}
+
+.o6 {
+  grid-area: o6;
+}
+
+.mini {
+  border: black 2px solid;
+  width: 130px;
+  height: 180px;
+}
+.mini img {
+  width: 130px;
+  height: 180px;
+}
+#ekran {
+  position: relative;
+}
+#soc {
+  top: 162px;
+  right: 218px;
+  position: absolute;
+}
+p {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  right: 50%;
+  transform: translateX(70%);
+}
+body {
+  background-color: bisque;
+}

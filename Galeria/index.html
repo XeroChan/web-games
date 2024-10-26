@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styl.css">
+    <script src="funkcje.js"></script>
+</head>
+
+<body ondragstart="return false;" ondrop="return false;">
+    <div class="main">
+        <div class="columnL">
+            <div class="mini" id="o1" onclick="Zoom(this)"><img src="motyl.jpg"></div>
+            <div class="mini" id="o2" onclick="Zoom(this)"><img src="morze.jpg"></div>
+            <div class="mini" id="o3" onclick="Zoom(this)"><img src="blekitna-abstrakcja.jpg"></div>
+            <div class="mini" id="o4" onclick="Zoom(this)"><img src="rosa.jpg"></div>
+            <div class="mini" id="o5" onclick="Zoom(this)"><img src="uliczka.jpg"></div>
+            <div class="mini" id="o6" onclick="Zoom(this)"><img src="flamingi.jpg"></div>
+        </div>
+        <div class="columnR">
+            <div id="ekran">
+                <p>Wybierz obraz,<br>który chcesz wyświetlić.</p><img id="canvas" src="canvas.png" height="730"
+                    width="730">
+                <div id="soc"></div>
+                
+            </div>
+
+        </div>
+    </div>
+    <!-- (this) przechwytuje wartosc -->
+    <a href="../Portfolio/index.html">Powrót</a>
+</body>
+
+</html>

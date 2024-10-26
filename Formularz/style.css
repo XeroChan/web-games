@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #1d1e26;
+  color: white;
+}
+a{
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+a:link {
+  color: #f20587;
+}
+
+/* visited link */
+a:visited {
+  color: rgb(148, 148, 148);
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: #ff6ebe;
+}
+.title {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  width: 400px;
+  padding: 25px;
+  transform: translate(-50%, -5%);
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  z-index: 1;
+}
+.title p {
+  text-align: center;
+}
+.title h2,
+.title h3 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+.border-style {
+  margin: 0 0 30px;
+}
+.border-color {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.border-color input[type="color"] {
+  padding: 0;
+  outline: none;
+  -webkit-appearance: none;
+}
+.border-style select,
+.border-color input[type="color"] {
+  cursor: pointer;
+}
+.border-color input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 2px;
+}
+.border-color input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+.title .left,
+.title .border-width {
+  position: relative;
+}
+
+.title .left input[type="number"],
+.title .border-width input[type="number"] {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.title .left label,
+.title .border-width label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.title .left input:focus ~ label,
+.title .border-width input:focus ~ label {
+  top: -20px;
+  left: 0;
+  color: #f20587;
+  font-size: 12px;
+}
+.title .left p,
+.title .border-width p {
+  display: inline;
+}
+.title .left input:focus ~ p,
+.title .border-width input:focus ~ p {
+  top: -20px;
+  left: 0;
+  color: #f20587;
+  font-size: 12px;
+  transition: 0.5s;
+}
+.keep {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+#div1 {
+  position: absolute;
+  width: 160px;
+  height: 150px;
+  left: 747px;
+  bottom: 45px;
+  background-color: green;
+}
+#div2 {
+  position: absolute;
+  left: 907px;
+  bottom: 196px;
+  width: 350px;
+  height: 160px;
+  padding: 5px;
+  border: rgb(16, 3, 133) 7px dashed;
+  background-color: #e4cef2;
+}
+#form1 {
+  text-align: center;
+  color: #5e35f2;
+}
+#form1 legend {
+  text-align: left;
+  margin-left: 10px;
+  padding: 0 5px;
+}
+#form1 p,
+input[type="button"] {
+  margin-bottom: 10px;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

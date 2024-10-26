@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+		}
+
+		div {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			border: white 1px solid;
+
+		}
+
+		div img {
+			width: 100px;
+			height: 100px;
+		}
+
+		#winID {
+			display: flex;
+			height: 100vh;
+			width: 100vw;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			background-color: rgba(0, 0, 0, 0.75);
+			z-index: 1;
+			border: 0;
+			visibility: hidden;
+		}
+		article{
+			margin-bottom: 15px;
+		}
+		p {
+			color: white;
+			font-size: 3.6rem;
+		}
+
+		#btn {
+			position: absolute;
+			width: 100px;
+			height: 25px;
+			top: 700px;
+			left: 905px;
+		}
+
+		#rest {
+			width: 100px;
+			height: 25px;
+		}
+a {
+  position: absolute;
+  left:50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+a:link {
+  color: #1194ff;
+}
+
+/* visited link */
+a:visited {
+  color: #62b9ff;
+}
+
+/* mouse over link */
+a:hover {
+  color: #1767a8;
+}
+
+/* selected link */
+a:active {
+  color: rgb(187, 187, 187);
+}
+#cont{
+  display: flex;
+  position: absolute;
+  left:50%;
+  transform: translateX(-50%);
+  align-content: center;
+  justify-content: center;
+  visibility: visible;
+}
+	</style>
+	<script>
+
+
+
+		function Mieszaj() {
+			for (let i = 0; i < 16; i++) {
+				TabPos[i][2] = 0;
+			}
+
+			let x, i = 0;
+			while (i < 16) {
+				x = Math.floor(Math.random() * 16);
+				if (TabPos[x][2] == 0) {
+					TabDiv[i].style.left = TabPos[x][0];
+					TabDiv[i].style.top = TabPos[x][1];
+					i++;
+					TabPos[x][2] = 1;
+				}
+			}
+		}
+
+		function Graj(x) {
+			//wyciągnięcie wartości atrybutu top i konwersja na int aby nie dało przesunąć się niestykających ze sobą kafelek
+			let blankTop = a33.style.top; //string
+			let swappedTop = x.style.top; //string
+			let blankSlicedTop = blankTop.slice(0, 3);
+			let swappedSlicedTop = swappedTop.slice(0, 3);
+			let parsedBlankSlicedT = parseInt(blankSlicedTop, 10);
+			let parsedSwappedSlicedT = parseInt(swappedSlicedTop, 10);
+			console.log("blank2: " + typeof (parsedBlankSlicedT) + " swapped2: " + typeof (parsedSwappedSlicedT)); //check
+
+			//to samo z parametrami left
+			let blankLeft = a33.style.left; //string
+			let swappedLeft = x.style.left; //string
+			let blankSlicedLeft = blankLeft.slice(0, 3);
+			let swappedSlicedLeft = swappedLeft.slice(0, 3);
+			let parsedBlankSlicedL = parseInt(blankSlicedLeft, 10);
+			let parsedSwappedSlicedL = parseInt(swappedSlicedLeft, 10);
+			console.log("blank2: " + typeof (parsedBlankSlicedL) + " swapped2: " + typeof (parsedSwappedSlicedL)); //check
+
+
+
+			let bufor;
+
+			if ((a33.style.left == x.style.left) && ((parsedBlankSlicedT == (parsedSwappedSlicedT - 100)) || (parsedBlankSlicedT == (parsedSwappedSlicedT + 100)))) {
+				bufor = a33.style.top;
+				a33.style.top = x.style.top;
+				x.style.top = bufor;
+			}
+
+			let bufor2;
+			if (a33.style.top == x.style.top && ((parsedBlankSlicedL == (parsedSwappedSlicedL - 100)) || (parsedBlankSlicedL == (parsedSwappedSlicedL + 100)))) {
+				bufor2 = a33.style.left;
+				a33.style.left = x.style.left;
+				x.style.left = bufor2;
+			}
+
+			//winning
+
+			for (let i = 0; i < 16; i++) {
+				SavePos[i] = [];
+			}
+			for (let i = 0; i < 16; i++) {
+				SavePos[i][0] = TabDiv[i].style.left;
+				SavePos[i][1] = TabDiv[i].style.top;
+				SavePos[i][2] = 1;
+				//console.log(SavePos[i][0], " ", SavePos[i][1]," ",SavePos[i][2]);
+				//console.log(TabPos[i][0], " ", TabPos[i][1]," ",TabPos[i][2], "\n\n");
+			}
+
+			function isEqual(a, b) {
+				if (a instanceof Array && b instanceof Array) {
+					if (a.length !== b.length) {
+						return false;
+					}
+
+					for (var i = 0; i < a.length; i++) {
+						if (!isEqual(a[i], b[i])) {
+							return false;
+						}
+					}
+
+					return true;
+				}
+
+				return a === b;
+			}
+
+			var isEqual = isEqual(SavePos, TabPos);
+			console.log(isEqual);
+			if (isEqual == true) {
+				var element = document.getElementById("winID");
+				element.style.visibility = "visible";
+				var ref=document.getElementById("cont");
+                ref.style.left="50%";
+                ref.style.top="80%";
+                ref.style.transform="translate(-50%,-80%)";
+				ref.style.zIndex="2";
+			}
+
+		}
+	</script>
+</head>
+
+<body>
+	<section id="winID">
+		<article>
+			<p>Wygrałeś!</p>
+		</article>
+		<article><input id="rest" type="button" value="RESTART" onclick="restart();"></article>
+	</section>
+	<input id="btn" type="button" value="MIESZAJ" onclick="Mieszaj();">
+
+	<script>
+		let wygrana = document.getElementById('winID');
+		var num = 4, newdiv, divIdName;
+		for (let i = 0; i < num; i++) {
+			for (let j = 0; j < num; j++) {
+				newdiv = document.createElement('div');
+				divIdName = 'a' + i + j;
+				newdiv.setAttribute('id', divIdName);
+				newdiv.style.top = 260 + 100 * i + "px";
+				newdiv.style.left = 320 + 100 * j + "px";
+				if (i * j != 9)
+					newdiv.innerHTML = "<img src='slice_" + i + j + ".png'>";
+				newdiv.addEventListener('click', function () { Graj(this); });
+				document.body.appendChild(newdiv);
+
+			}
+		}
+
+		let TabDiv = document.querySelectorAll('div');
+		console.log(TabDiv);
+		let SavePos = [];
+
+		let TabPos = [];
+		for (let i = 0; i < 16; i++) {
+			TabPos[i] = [];
+		}
+		for (let i = 0; i < 16; i++) {
+			TabPos[i][0] = TabDiv[i].style.left;
+			TabPos[i][1] = TabDiv[i].style.top;
+			TabPos[i][2] = 0;
+			//console.log(TabPos[i][0], " ", TabPos[i][1]);
+		}
+		for (let j = 0; j < 16; j++) {
+			//console.log("Left TabPos[" + j + "][0]: ", TabPos[j][0], "\n", "Top TabPos[" + j + "][1]: ", TabPos[j][1]);
+			//console.log("\n");
+		}
+		function restart() {
+			window.location.reload(true);
+		}
+	</script>
+
+	<div style='top: 260px;left: 1200px;border: 0px;height: 400px;width: 400px;'><img style='height:400px;width:400px;'
+			src="main.jpg"></div>
+
+			<div id="cont"><a href="../Portfolio/index.html">Powrót</a></div>
+</body>
+
+</html>

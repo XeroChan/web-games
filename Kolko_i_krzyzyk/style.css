@@ -1,0 +1,112 @@
+* {
+  padding: 0;
+  margin: 0;
+  /* wyłączone zaznaczanie tekstu */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+  supported by Chrome, Edge, Opera and Firefox */
+  font-family: "Caveat", cursive;
+}
+#b1,
+#b2,
+#b3,
+#b4,
+#b5,
+#b6,
+#b7,
+#b8,
+#b9 {
+  width: 80px;
+  height: 52px;
+  margin: auto;
+  border: 1px solid whitesmoke;
+  border-radius: 6px;
+  font-size: 45px;
+  text-align: center;
+}
+.bkgrd {
+  background-color: #503fbf;
+  height: 100vh;
+  padding-top: 1px;
+}
+.Title {
+  color: white;
+  text-align: center;
+  font-size: 40px;
+  margin-top: 10%;
+}
+.Display,
+#display-winner {
+  color: white;
+  font-size: 35px;
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.hide {
+  display: none;
+}
+.container {
+  margin: 0 auto;
+  max-width: 300px;
+  text-align: center;
+}
+.Reset {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+}
+.Reset button {
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  font-size: 20px;
+  margin-left: 1em;
+  cursor: pointer;
+}
+a {
+  margin-left: 50%;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 5px;
+  background-color: #ced0fc;
+  display: inline-block;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+}
+a:link {
+  color: #555555;
+}
+
+/* visited link */
+a:visited {
+  color: #00754a;
+}
+
+/* mouse over link */
+a:hover {
+  background-color: #4e49a6;
+  color: white;
+  border: 1px solid whitesmoke;
+}
+
+/* selected link */
+a:active {
+  color: lightpink;
+}
+input {
+  background-color: #4e49a6;
+  cursor: pointer;
+}
+#reset {
+  background-color: #ced0fc;
+  color: #555555;
+}
